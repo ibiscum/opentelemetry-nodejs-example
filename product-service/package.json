@@ -13,8 +13,8 @@
   "dependencies": {
     "@opentelemetry/api": "^1.8.0",
     "@opentelemetry/auto-instrumentations-node": "^0.45.0",
-    "express": "^4.19.2",
-    "mongoose": "^8.3.2",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
     "node-fetch": "^3.3.2"
   }
 }
