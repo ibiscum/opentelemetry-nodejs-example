@@ -32,7 +32,7 @@ app.get("/", async (req, res) => {
     res.json({"Status": `Product Service running on http://localhost:${port}`})
 });
 
-app.get('/products', async (req, res) => {
+app.get('/products', limiter, async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
