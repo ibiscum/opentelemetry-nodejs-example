@@ -37,7 +37,7 @@ const getOrdersLimiter = rateLimit({
   message: "Too many requests to fetch orders, please try again later.",
 });
 
-const dbUrl = "mongodb://mongodb:27017/orders";
+const dbUrl = "mongodb://localhost:27017/orders";
 connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const OrderSchema = new Schema({
