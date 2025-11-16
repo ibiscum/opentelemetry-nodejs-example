@@ -23,6 +23,13 @@ const patchOrderLimiter = rateLimit({
   message: "Too many requests to update orders, please try again later.",
 });
 
+// Rate limiter for GET /orders/:id
+const getOrderLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests to fetch order details, please try again later.",
+});
+
 const dbUrl = "mongodb://mongodb:27017/orders";
 connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -75,7 +82,7 @@ app.post("/orders", async (req, res) => {
 });
 
 // GET order by ID
-app.get("/orders/:id", async (req, res) => {
+app.get("/orders/:id", getOrderLimiter, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (!order) {
