@@ -32,6 +32,11 @@ app.post('/payments', async (req, res) => {
     try {
         const { orderId, amount } = req.body;
 
+        // Validate 'orderId' is a valid MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(orderId)) {
+            return res.status(400).json({ error: 'Invalid order ID format' });
+        }
+
         // Fetch the order to check its status and validity
         const order = await fetch(`http://order:3001/orders/${orderId}`).then(res => res.json());
         console.log(order);
