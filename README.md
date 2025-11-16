@@ -1,4 +1,7 @@
-# opentelemetry-signoz-sample
+# opentelemetry-nodejs-sample
+
+[![CodeQL Advanced](https://github.com/ibiscum/opentelemetry-nodejs-example/actions/workflows/codeql.yml/badge.svg)](https://github.com/ibiscum/opentelemetry-nodejs-example/actions/workflows/codeql.yml)
+[![Dependabot Updates](https://github.com/ibiscum/opentelemetry-nodejs-example/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/ibiscum/opentelemetry-nodejs-example/actions/workflows/dependabot/dependabot-updates)
 
 ## Project Overview
 
