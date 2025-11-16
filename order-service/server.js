@@ -120,6 +120,9 @@ app.get("/orders/:id", getOrderLimiter, async (req, res) => {
 app.patch("/orders/:id", patchOrderLimiter, async (req, res) => {
   try {
     const { status } = req.body;
+    if (typeof status !== "string") {
+      return res.status(400).json({ message: "Invalid status value" });
+    }
     const order = await Order.findByIdAndUpdate(
       req.params.id,
       { status },
