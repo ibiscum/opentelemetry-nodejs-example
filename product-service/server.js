@@ -1,9 +1,18 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
+import rateLimit from 'express-rate-limit';
 const { connect, connection, Schema, model } = mongoose;
 
 const app = express();
 const port = 3003;
+
+// Define a rate limiter for expensive routes
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true, 
+  legacyHeaders: false
+});
 
 const dbUrl = 'mongodb://localhost:27017/products';
 connect(dbUrl);
@@ -46,7 +55,7 @@ app.post('/products', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-app.post('/products/:id/decrement-stock', async (req, res) => {
+app.post('/products/:id/decrement-stock', limiter, async (req, res) => {
     const { decrementBy } = req.body;
     try {
         const product = await Product.findById(req.params.id);
