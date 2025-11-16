@@ -1,5 +1,6 @@
 import "./telemetry.js";
 import express, { json } from "express";
+import rateLimit from "express-rate-limit";
 import fetch from "node-fetch";
 import mongoose from "mongoose";
 import { performance } from "perf_hooks";
@@ -95,7 +96,7 @@ app.get("/orders/:id", async (req, res) => {
   }
 });
 
-app.patch("/orders/:id", async (req, res) => {
+app.patch("/orders/:id", patchOrderLimiter, async (req, res) => {
   try {
     const { status } = req.body;
     const order = await Order.findByIdAndUpdate(
