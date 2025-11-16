@@ -5,9 +5,9 @@ import mongoose from "mongoose";
 import { performance } from "perf_hooks";
 // Import the logger
 import logger from "./logger.js";
-const { connect, Schema, model } = mongoose;
-
 import { trace, metrics, SpanStatusCode } from "@opentelemetry/api";
+
+const { connect, Schema, model } = mongoose;
 
 const tracer = trace.getTracer("order-service");
 const meter = metrics.getMeter("order-service");

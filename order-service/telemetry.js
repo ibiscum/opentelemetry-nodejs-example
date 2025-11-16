@@ -1,12 +1,15 @@
 import { metrics } from '@opentelemetry/api';
-import { MeterProvider, PeriodicExportingMetricReader, ConsoleMetricExporter } from '@opentelemetry/sdk-metrics';
-import { Resource } from '@opentelemetry/resources';
-import { SEMRESATTRS_SERVICE_NAME, SEMRESATTRS_SERVICE_VERSION } from '@opentelemetry/semantic-conventions';
+import { MeterProvider, PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
+//import { Resource } from '@opentelemetry/resources';
 import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http';
+import pkga from '@opentelemetry/semantic-conventions';
+const { ATTRS_SERVICE_NAME } = pkga;
+import pkgb from '@opentelemetry/resources';
+const { Resource } = pkgb;
 
 const resource = Resource.default().merge(
   new Resource({
-    [SEMRESATTRS_SERVICE_NAME]: 'order-service'
+    [ATTRS_SERVICE_NAME]: 'order-service'
   }),
 );metrics
 

@@ -3,25 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node --trace-warnings ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@opentelemetry/api": "^1.8.0",
-    "@opentelemetry/auto-instrumentations-node": "^0.45.0",
-    "@opentelemetry/exporter-metrics-otlp-http": "^0.51.1",
-    "@opentelemetry/sdk-metrics": "^1.24.1",
-    "@opentelemetry/sdk-metrics-base": "^0.31.0",
-    "@opentelemetry/sdk-node": "^0.51.1",
-    "express": "^4.19.2",
-    "mongoose": "^8.3.2",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.67.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "^0.208.0",
+    "@opentelemetry/sdk-metrics": "^2.2.0",
+    "@opentelemetry/sdk-node": "^0.208.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.4",
     "node-fetch": "^3.3.2",
-    "pino": "^9.1.0",
-    "pino-opentelemetry-transport": "^1.0.0",
-    "pino-pretty": "^11.1.0"
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.2"
   }
 }

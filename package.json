@@ -1,5 +1,5 @@
 {
-  "name": "opentelemetry-signoz-sample",
+  "name": "opentelemetry-nodejs-sample",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -11,7 +11,8 @@
     "start:product": "cd product-service && node server.js",
     "start:order": "cd order-service && node server.js",
     "start:payment": "cd payment-service && node server.js",
-    "start:all": "npm run start:user & npm run start:product & npm run start:order & npm run start:payment"
+    "start:all": "npm run start:user & npm run start:product & npm run start:order & npm run start:payment",
+    "lint": "eslint --fix"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,9 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "@eslint/js": "^9.39.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0"
   }
 }

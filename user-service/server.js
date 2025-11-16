@@ -5,8 +5,8 @@ const { connect, connection, Schema, model } = mongoose;
 const app = express();
 const port = 3004;
 
-const dbUrl = 'mongodb://mongodb:27017/users';
-connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+const dbUrl = 'mongodb://localhost:27017/users';
+connect(dbUrl);
 const db = connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
