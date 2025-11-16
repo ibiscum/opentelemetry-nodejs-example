@@ -1,10 +1,18 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
+import rateLimit from 'express-rate-limit';
 const { connect, connection, Schema, model } = mongoose;
 
 const app = express();
 const port = 3004;
 
+// Rate limiter: max 100 requests per 15 minutes per IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+// Apply rate limiter to all requests
+app.use(limiter);
 const dbUrl = 'mongodb://localhost:27017/users';
 connect(dbUrl);
 const db = connection;

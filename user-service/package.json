@@ -15,6 +15,7 @@
     "@opentelemetry/auto-instrumentations-node": "^0.67.0",
     "express": "^5.1.0",
     "mongoose": "^8.19.4",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "express-rate-limit": "^8.2.1"
   }
 }
