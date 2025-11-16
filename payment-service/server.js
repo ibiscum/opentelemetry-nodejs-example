@@ -7,8 +7,8 @@ const { connect, Schema, model } = mongoose;
 const app = express();
 const port = 3002;
 
-const dbUrl = 'mongodb://mongodb:27017/payments';
-connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+const dbUrl = 'mongodb://localhost:27017/payments';
+connect(dbUrl);
 
 const PaymentSchema = new Schema({
     orderId: { type: Schema.Types.ObjectId, ref: 'Order' },
