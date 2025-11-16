@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import fetch from 'node-fetch';
 import mongoose from 'mongoose';
+import rateLimit from 'express-rate-limit';
 const { connect, Schema, model } = mongoose;
 
 const app = express();
@@ -19,11 +20,19 @@ const Payment = model('Payment', PaymentSchema);
 
 app.use(json());
 
+// Setup rate limiter: max 100 requests per 15 minutes for /payments
+const paymentsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true, 
+  legacyHeaders: false,
+});
+
 app.get("/", async (req, res) => {
     res.json({"Status": `Payment Service running on http://localhost:${port}`})
 });
 
-app.get('/payments', async (req, res) => {
+app.get('/payments', paymentsLimiter, async (req, res) => {
   const payments = await Payment.find();
   res.json(payments);
 });
