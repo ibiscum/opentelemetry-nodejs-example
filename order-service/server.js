@@ -16,6 +16,13 @@ const meter = metrics.getMeter("order-service");
 const app = express();
 const port = 3001;
 
+// Rate limiter for PATCH /orders/:id
+const patchOrderLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // limit each IP to 50 requests per windowMs
+  message: "Too many requests to update orders, please try again later.",
+});
+
 const dbUrl = "mongodb://mongodb:27017/orders";
 connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
