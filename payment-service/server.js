@@ -40,6 +40,8 @@ app.get('/payments', paymentsLimiter, async (req, res) => {
 app.post('/payments', async (req, res) => {
     try {
         const { orderId, amount } = req.body;
+        // Ensure orderId is canonical string before use
+        const safeOrderId = encodeURIComponent(String(orderId));
 
         // Validate 'orderId' is a valid MongoDB ObjectId
         if (!mongoose.Types.ObjectId.isValid(orderId)) {
@@ -47,7 +49,7 @@ app.post('/payments', async (req, res) => {
         }
 
         // Fetch the order to check its status and validity
-        const order = await fetch(`http://order:3001/orders/${orderId}`).then(res => res.json());
+        const order = await fetch(`http://order:3001/orders/${safeOrderId}`).then(res => res.json());
         console.log(order);
         if (!order || order.status !== 'awaiting payment') {
             return res.status(400).json({ error: 'Invalid order ID or order not ready for payment' });
@@ -57,7 +59,7 @@ app.post('/payments', async (req, res) => {
         await newPayment.save();
 
         // Optionally, update the order status to 'paid'
-        await fetch(`http://order:3001/orders/${orderId}`, {
+        await fetch(`http://order:3001/orders/${safeOrderId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: 'paid' })
