@@ -37,7 +37,7 @@ app.get('/products', limiter, async (req, res) => {
   res.json(products);
 });
 
-app.get('/products/:id', async (req, res) => {
+app.get('/products/:id', limiter, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
